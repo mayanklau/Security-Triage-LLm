@@ -1,33 +1,38 @@
-# Security LLM Triage Chatbot
+Security Triage LLM Chatbot
 
-A lightweight, terminal-friendly chatbot for triaging security findings using OpenAI GPT.  
-Built entirely in **Termux**, this project features:
-
-- **FastAPI** backend for handling triage requests  
-- **React** frontend for easy input and viewing results  
-- **OpenAI GPT** for vulnerability interpretation  
-- **No hardcoding** of secrets (API keys passed securely at runtime)  
-- **Optional Telegram alerts**  
-- **CSV & Markdown logging** (coming soon)
-
----
+A FastAPI + React-powered chatbot that uses OpenAI GPT to triage security logs or findings and suggest risk, severity, and fix steps.
 
 ## Features
 
-- Input raw vulnerability findings  
-- Get severity, risk summary, category, and fix suggestions via LLM  
-- Use Telegram token (optional) to forward results  
-- Fully CLI and mobile-friendly  
-- No dependencies on heavy infra or hardcoded secrets  
+- Input attack logs (e.g. SQLi, XSS)
+- Powered by GPT-3.5/4
+- Returns risk, category, severity & recommended fix
+- React frontend + FastAPI backend
+- CORS and OpenAI key injection supported
 
----
+## Getting Started
 
-## Setup (Termux tested)
+### Backend
 
 ```bash
-# Clone
-git clone https://github.com/mayanklau/Security-Triage-LLm.git
-cd Security-Triage-LLm
+cd backend
+source ../venv/bin/activate
+uvicorn main:app --host 0.0.0.0 --port 8000
 
-# Run all (backend + frontend)
-bash start.sh
+Frontend
+
+cd frontend
+npm install
+npm start
+
+Environment Setup
+
+Create a .env file (optional) or use API key directly in frontend.
+
+Example Log to Triage
+
+WAF detected XSS attempt on /search?q=<script>alert(1)</script>
+
+License
+
+MIT
